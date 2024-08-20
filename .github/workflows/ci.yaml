@@ -9,6 +9,8 @@ on:
         branches:
             -master
 
+    workflow_dispatch: null
+
 jobs:
     build:
         runs-on: {{ matrix.os }}
