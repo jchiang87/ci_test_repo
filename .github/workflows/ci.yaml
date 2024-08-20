@@ -1,0 +1,40 @@
+name: ci_test_repo CI
+
+on:
+    push:
+        branches:
+            -master
+
+    pull_request:
+        branches:
+            -master
+
+jobs:
+    build:
+        runs-on: {{ matrix.os }}
+
+        strategy:
+            matrix:
+                os: [ ubuntu-latest ]
+                py: [ "3.11" ]
+                CC: [ gcc ]
+                CXX: [ g++ ]
+
+        defaults:
+            run:
+                shell: bash -l {0}
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Clone the package and checkout the branch
+              shell: bash -l {0}
+              run: |
+                git clone https://github.com/${GITHUB_REPOSITORY}
+                cd ci_test_repo
+                git fetch origin ${GITHUB_REF}:TESTING
+                git checkout TESTING
+
+            - name: Run the test
+              run: |
+                python scripts/ci_test.py
