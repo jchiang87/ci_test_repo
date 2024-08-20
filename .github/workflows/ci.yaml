@@ -1,4 +1,4 @@
-name: bot-eotest-configs CI
+name: ci_test_repo CI
 
 on:
     push:
