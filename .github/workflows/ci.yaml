@@ -3,11 +3,13 @@ name: ci_test_repo CI
 on:
     push:
         branches:
-            -main
+            - main
 
     pull_request:
         branches:
-            -main
+            - main
+
+    workflow_dispatch: null
 
 jobs:
     build:
